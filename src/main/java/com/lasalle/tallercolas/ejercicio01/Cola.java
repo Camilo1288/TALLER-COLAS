@@ -6,11 +6,12 @@ package com.lasalle.tallercolas.ejercicio01;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 /**
  *
  * @author Usuario
  */
-public class Cola {
+    public class Cola<T> {
     private Queue<T> elementos;
 
     public Cola() {
@@ -26,21 +27,19 @@ public class Cola {
     }
 
     public boolean estaVacia() {
-        elementos.isEmpty();
-        return false;
+        return elementos.isEmpty();
     }
 
-   
+    // (a) Método para obtener un iterador sobre la cola
     public Iterator<T> obtenerIterador() {
         return elementos.iterator();
     }
 
-    
+    // (b) Método para obtener el último elemento de una cola sin alterarla
     public T obtenerUltimo() {
         if (elementos.isEmpty()) {
             return null;
         }
-        
         Queue<T> aux = new LinkedList<>(elementos);
         T ultimo = null;
         while (!aux.isEmpty()) {
@@ -49,9 +48,30 @@ public class Cola {
         return ultimo;
     }
 
-    private static class T {
+    // (c) Método para producir una cola al revés utilizando una pila
+    public Cola<T> invertirCola() {
+        Stack<T> pilaAuxiliar = new Stack<>();
+        Queue<T> colaOriginalCopia = new LinkedList<>(this.elementos);
 
-        public T() {
+        while (!colaOriginalCopia.isEmpty()) {
+            pilaAuxiliar.push(colaOriginalCopia.poll());
+        }
+
+        Cola<T> colaInvertida = new Cola<>();
+        while (!pilaAuxiliar.isEmpty()) {
+            colaInvertida.encolar(pilaAuxiliar.pop());
+        }
+
+        return colaInvertida;
+    }
+
+    // (d) Método para concatenar otra cola al final de la actual
+    public void concatenar(Cola<T> otraCola) {
+        if (otraCola != null && !otraCola.estaVacia()) {
+            Iterator<T> it = otraCola.obtenerIterador();
+            while (it.hasNext()) {
+                this.encolar(it.next());
+            }
         }
     }
 }
