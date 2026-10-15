@@ -13,7 +13,6 @@ public class ColaCine<T> {
     private Queue<T> clientesAsiduos;
     private Queue<T> clientesOcasionales;
 
-    
     public ColaCine() {
         this.clientesAsiduos = new LinkedList<>();
         this.clientesOcasionales = new LinkedList<>();
