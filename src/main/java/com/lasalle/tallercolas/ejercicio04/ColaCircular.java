@@ -10,29 +10,24 @@ package com.lasalle.tallercolas.ejercicio04;
  */
 
     public class ColaCircular<T> {
-
-    
-    private class Nodo {
+private class Nodo {
         T dato;
         Nodo siguiente;
 
         public Nodo(T dato) {
             this.dato = dato;
-            this.siguiente = this; 
+            this.siguiente = this;
         }
     }
 
-    private Nodo primerLleno;     
+    private Nodo primerLleno;      
     private Nodo primerDesocupado; 
-    private int tamañoMaximo;
     private int elementosActuales;
 
     public ColaCircular(int capacidad) {
-        this.tamañoMaximo = capacidad;
         this.elementosActuales = 0;
         this.primerLleno = null;
         this.primerDesocupado = null;
-        
         
         if (capacidad > 0) {
             Nodo primerNodo = new Nodo(null);
@@ -50,5 +45,24 @@ package com.lasalle.tallercolas.ejercicio04;
 
     public boolean estaVacia() {
         return elementosActuales == 0;
+    }
+
+    // Método para insertar (encolar) un elemento en la cola circular
+    public void insertar(T dato) {
+        // Si la cola está llena (el primer desocupado coincide con el primer lleno y hay elementos)
+        if (elementosActuales > 0 && primerDesocupado == primerLleno) {
+            // Creamos un nuevo nodo y lo insertamos en la estructura circular
+            Nodo nuevoNodo = new Nodo(dato);
+            nuevoNodo.siguiente = primerDesocupado.siguiente;
+            primerDesocupado.siguiente = nuevoNodo;
+            
+            // Actualizamos referencias
+            primerDesocupado = nuevoNodo;
+        } else {
+            // Si hay espacio disponible en los nodos existentes
+            primerDesocupado.dato = dato;
+            primerDesocupado = primerDesocupado.siguiente;
+        }
+        elementosActuales++;
     }
 }
