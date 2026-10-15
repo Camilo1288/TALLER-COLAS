@@ -27,8 +27,22 @@ public class Deque<T> {
         return elementos.pollFirst();
     }
 
-    // Método 1: agregar un elemento al inicio de la cola (bicola)
+    
     public void agregarPrimero(T elem) {
         elementos.addFirst(elem);
+    }
+    public T eliminarUltimo() {
+        if (estaVacia()) {
+            return null;
+        }
+        return elementos.pollLast();
+    }
+
+    // Método 3: obtener el último elemento de la cola sin eliminarlo
+    public T ultimoElemento() {
+        if (estaVacia()) {
+            return null;
+        }
+        return elementos.peekLast();
     }
 }
