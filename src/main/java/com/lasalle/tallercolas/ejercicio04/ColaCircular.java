@@ -88,7 +88,6 @@ private class Nodo {
 
         System.out.println("Removido: " + cola.remover());
         System.out.println("Removido: " + cola.remover());
-        
         System.out.println("Pruebas de Cola Circular ejecutadas con éxito.");
     }
 }
