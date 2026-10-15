@@ -22,4 +22,33 @@ public class ColaCine<T> {
     public boolean estaVacia() {
         return clientesAsiduos.isEmpty() && clientesOcasionales.isEmpty();
     }
+    public void anadir(T elemento, boolean esAsiduo) {
+        if (esAsiduo) {
+            clientesAsiduos.offer(elemento);
+        } else {
+            clientesOcasionales.offer(elemento);
+        }
+    }
+
+    // (c) Consultar el primer elemento de una cola (prioridad a asiduos)
+    public T consultarPrimero() {
+        if (estaVacia()) {
+            return null;
+        }
+        if (!clientesAsiduos.isEmpty()) {
+            return clientesAsiduos.peek();
+        }
+        return clientesOcasionales.peek();
+    }
+
+    // (d) Eliminar el primer elemento de una cola (prioridad a asiduos)
+    public T eliminarPrimero() {
+        if (estaVacia()) {
+            return null;
+        }
+        if (!clientesAsiduos.isEmpty()) {
+            return clientesAsiduos.poll();
+        }
+        return clientesOcasionales.poll();
+    }
 }
