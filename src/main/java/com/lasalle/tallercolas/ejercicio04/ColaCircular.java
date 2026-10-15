@@ -47,22 +47,48 @@ private class Nodo {
         return elementosActuales == 0;
     }
 
-    // Método para insertar (encolar) un elemento en la cola circular
     public void insertar(T dato) {
-        // Si la cola está llena (el primer desocupado coincide con el primer lleno y hay elementos)
         if (elementosActuales > 0 && primerDesocupado == primerLleno) {
-            // Creamos un nuevo nodo y lo insertamos en la estructura circular
             Nodo nuevoNodo = new Nodo(dato);
             nuevoNodo.siguiente = primerDesocupado.siguiente;
             primerDesocupado.siguiente = nuevoNodo;
-            
-            // Actualizamos referencias
             primerDesocupado = nuevoNodo;
         } else {
-            // Si hay espacio disponible en los nodos existentes
             primerDesocupado.dato = dato;
             primerDesocupado = primerDesocupado.siguiente;
         }
         elementosActuales++;
+    }
+
+    // Método para remover un elemento de la cola circular
+    public T remover() {
+        // Si se intenta remover de una cola vacía se dispara una excepción
+        if (estaVacia()) {
+            throw new IllegalStateException("La cola circular está vacía, no se puede remover.");
+        }
+
+        T datoRemovido = primerLleno.dato;
+        primerLleno.dato = null; // Limpiamos el dato
+        primerLleno = primerLleno.siguiente; // Avanza el primer lleno
+        elementosActuales--;
+
+        return datoRemovido;
+    }
+
+    // Método principal para pruebas
+    public static void main(String[] args) {
+        ColaCircular<String> cola = new ColaCircular<>(3);
+        
+        cola.insertar("Elemento 1");
+        cola.insertar("Elemento 2");
+        cola.insertar("Elemento 3");
+        
+        // Al insertar un cuarto elemento, como está llena, se expande automáticamente
+        cola.insertar("Elemento 4 (Extra)");
+
+        System.out.println("Removido: " + cola.remover());
+        System.out.println("Removido: " + cola.remover());
+        
+        System.out.println("Pruebas de Cola Circular ejecutadas con éxito.");
     }
 }
