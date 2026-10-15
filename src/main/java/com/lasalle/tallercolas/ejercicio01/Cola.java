@@ -30,17 +30,17 @@ public class Cola {
         return false;
     }
 
-    // (a) Método para obtener un iterador sobre la cola
+   
     public Iterator<T> obtenerIterador() {
         return elementos.iterator();
     }
 
-    // (b) Método para obtener el último elemento de una cola sin alterarla
+    
     public T obtenerUltimo() {
         if (elementos.isEmpty()) {
             return null;
         }
-        // Usamos una cola auxiliar para preservar el orden y la estructura
+        
         Queue<T> aux = new LinkedList<>(elementos);
         T ultimo = null;
         while (!aux.isEmpty()) {
