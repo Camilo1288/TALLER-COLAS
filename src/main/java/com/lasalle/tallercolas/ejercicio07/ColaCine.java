@@ -13,13 +13,13 @@ public class ColaCine<T> {
     private Queue<T> clientesAsiduos;
     private Queue<T> clientesOcasionales;
 
-    // (a) Crear una cola vacía
+    
     public ColaCine() {
         this.clientesAsiduos = new LinkedList<>();
         this.clientesOcasionales = new LinkedList<>();
     }
 
-    // (g) Consultar si una cola está vacía o no está vacía
+    
     public boolean estaVacia() {
         return clientesAsiduos.isEmpty() && clientesOcasionales.isEmpty();
     }
